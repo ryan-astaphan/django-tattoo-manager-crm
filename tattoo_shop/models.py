@@ -4,19 +4,19 @@ from django.utils.text import slugify
 
 # https://github.com/stefanfoulis/django-phonenumber-field
 # pipenv install django-phonenumber-field[phonenumbers]
-from phonenumber_field.modelfields import PhoneNumberField
+# from phonenumber_field.modelfields import PhoneNumberField
 
 
 # Create your models here.
 class TattooShop(models.Model):
     shop_name = models.CharField(max_length=40, unique=True)
-    slug = models.SlugField()
+    # slug = models.SlugField(blank=True) 
 
     def __str__(self):
         return self.shop_name
     
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.shop_name)
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.shop_name)
 
 
 class Artist(models.Model):
@@ -58,8 +58,14 @@ class Transactions(models.Model):
         on_delete=models.CASCADE, 
         # editable=False (I'm not sure if this is correct) 
         )
-    customer = models.ForeignKey(Customer, null=TRUE, on_delete=models.SET_NULL)
-    artist = models.ForeignKey(artist, on_delete=models.SET_NULL)
+    customer = models.ForeignKey(
+        Customer, 
+        null=True, 
+        on_delete=models.SET_NULL)
+    artist = models.ForeignKey(
+        Artist, 
+        null=True,
+        on_delete=models.SET_NULL)
     appointment_date = models.DateField()
     tattoo_description = models.TextField(max_length=300)
     custom_design = models.BooleanField(help_text='Check the box if the \
@@ -68,20 +74,27 @@ class Transactions(models.Model):
     custom_design_finished = models.BooleanField(help_text='Check the box \
         if the design is finalized',
         null=True)
-    deposit_amount = models.DecimalField(min_value=0.0, 
-    decimal_places=2,
-    help_text='Enter only if a customer paid a deposit',
-    default=0.0)
+    # deposit amount should enforce positive numbers only
+    deposit_amount = models.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+        help_text='Enter only if a customer paid a deposit',
+        blank=True,
+        null=True)
     deposit_date = models.DateField(blank=True,
     null=True,)
-    quote = models.CharFieldField(
+    quote = models.CharField(
         max_length=30,
         help_text='If you gave a quoted price, enter it here to remember',
         blank=True)
-    final_payment = models.DecimalField(min_value=0.0, decimal_places=2)
+    # final payment should enforce positive numbers only
+    final_payment = models.DecimalField(max_digits=5, decimal_places=2)
     artist_paid = models.BooleanField(
         default=False,
         help_text="Check here after you've paid your artist"
     )
+    
+    class Meta:
+        verbose_name_plural = 'Transactions'
 
     
