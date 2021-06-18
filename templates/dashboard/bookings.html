@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Booking List{% endblock title %}
+
+{% block content %}
+  <h1>Booking List</h1>
+  <ul>
+    {% for booking in Bookings %}
+    <li><a href="{{ booking.get_absolute_url }}">{{ booking }}</a></li>
+    {% endfor %}
+  </ul>
+  <br>
+  <ul>
+    <li><a href="{% url 'dashboard' %}">Back to Dashboard</a></li>
+  </ul>
+{% endblock content %}
+
+ 

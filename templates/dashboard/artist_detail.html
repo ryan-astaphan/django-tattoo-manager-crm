@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Artist Detail{% endblock title %}
+
+{% block content %}
+  <h1>Artist Detail</h1>
+  <div>
+    Artist Name: {{ artist.artist_name }}
+  </div>
+  <br>
+  <ul>
+    <li><a href="{% url 'artist_update' %}">Edit Artist's Information</a></li>
+    <li><a href="{% url 'artists' %}">Back to Artist List</a></li>
+    <li><a href="{% url 'dashboard' %}">Back to Dashboard</a></li>
+  </ul>
+{% endblock content %}
+
+ 

@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Tattoo Shop Dashboard{% endblock title %}
+
+{% block content %}
+  <h1>Tattoo Shop Dashboard</h1>
+  <div> 
+      <ul>
+        <li><a href="{% url 'add_tattooshop' %}">Add Your Tattoo Shop</a></li>
+        <li><a href="{% url 'artists' %}">Artist List</a></li>
+        <li><a href="{% url 'add_artist' %}">Add an Artist</a></li>
+        <li><a href="{% url 'bookings' %}">Bookings List</a></li>
+        <li><a href="{% url 'add_booking' %}">Add a Booking</a></li>
+      </ul>
+  </div>
+{% endblock content %}

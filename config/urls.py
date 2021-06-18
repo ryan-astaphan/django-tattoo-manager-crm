@@ -10,4 +10,5 @@ urlpatterns = [
 
     # Local apps
     path('', include('pages.urls')),
+    path('dashboard/', include('tattoo_shop.urls')),
 ]

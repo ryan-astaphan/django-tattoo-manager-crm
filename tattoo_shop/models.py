@@ -1,6 +1,7 @@
 from django.db import models
+from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.utils.text import slugify
+# from django.utils.text import slugify
 
 # https://github.com/stefanfoulis/django-phonenumber-field
 # pipenv install django-phonenumber-field[phonenumbers]
@@ -10,13 +11,13 @@ from django.utils.text import slugify
 # Create your models here.
 class TattooShop(models.Model):
     shop_name = models.CharField(max_length=40, unique=True)
-    # slug = models.SlugField(blank=True) 
 
     def __str__(self):
         return self.shop_name
+
+    def get_absolute_url(self):
+        return reverse('dashboard')
     
-    # def save(self, *args, **kwargs):
-    #     self.slug = slugify(self.shop_name)
 
 
 class Artist(models.Model):
@@ -38,6 +39,9 @@ class Artist(models.Model):
     def __str__(self):
         return self.artist_name
 
+    def get_absolute_url(self):
+        return reverse('artist_detail', kwargs={'pk': self.pk})
+
 
 class Customer(models.Model):
     tattoo_shop = models.ForeignKey(TattooShop, on_delete=models.CASCADE)
@@ -52,7 +56,7 @@ class Customer(models.Model):
         return self.customer_name
 
 
-class Transactions(models.Model):
+class Booking(models.Model):
     tattoo_shop = models.ForeignKey(
         TattooShop, 
         on_delete=models.CASCADE, 
@@ -67,7 +71,7 @@ class Transactions(models.Model):
         null=True,
         on_delete=models.SET_NULL)
     appointment_date = models.DateField()
-    tattoo_description = models.TextField(max_length=300)
+    tattoo_description = models.TextField(max_length=300, blank=True)
     custom_design = models.BooleanField(help_text='Check the box if the \
         customer needs a custom design',
         null=True)
@@ -91,10 +95,7 @@ class Transactions(models.Model):
     final_payment = models.DecimalField(max_digits=5, decimal_places=2)
     artist_paid = models.BooleanField(
         default=False,
-        help_text="Check here after you've paid your artist"
-    )
-    
-    class Meta:
-        verbose_name_plural = 'Transactions'
+        help_text="Check here after you've paid your artist")   
 
-    
+    def get_absolute_url(self):
+        return reverse('bookings')

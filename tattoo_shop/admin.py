@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TattooShop, Artist, Customer, Transactions
+from .models import TattooShop, Artist, Customer, Booking
 
 # Register your models here.
 
@@ -7,4 +7,4 @@ from .models import TattooShop, Artist, Customer, Transactions
 admin.site.register(TattooShop)
 admin.site.register(Artist)
 admin.site.register(Customer)
-admin.site.register(Transactions)
+admin.site.register(Booking)
