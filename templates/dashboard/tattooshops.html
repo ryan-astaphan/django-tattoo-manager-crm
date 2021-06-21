@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Tattoo Shop List{% endblock title %}
+
+{% block content %}
+  <h1>Tattoo Shop List</h1>
+    {% for shop in Shops %}
+    <div>
+        <a href="{{ shop.get_absolute_url }}"><h2>{{ shop }}</h2></a>
+        <a href="{% url 'tattooshop_update' shop.pk %}">Edit</a> | 
+        <a href="{% url 'tattooshop_delete' shop.pk %}">Delete</a>
+    </div>
+    {% endfor %}
+  <br>
+  <ul>
+    <li><a href="{% url 'add_tattooshop' %}">Add Your Tattoo Shop</a></li>
+    <li><a href="{% url 'dashboard' %}">Back to Dashboard</a></li>
+  </ul>
+{% endblock content %}

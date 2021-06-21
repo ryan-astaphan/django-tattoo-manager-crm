@@ -5,13 +5,16 @@
 
 {% block content %}
   <h1>Artist List</h1>
-  <ul>
     {% for artist in Artists %}
-    <li><a href="{{ artist.get_absolute_url }}">{{ artist.artist_name }}</a></li>
+    <div>
+      <a href="{{ artist.get_absolute_url }}"><h2>{{ artist.artist_name }}</h2></a>
+      <a href="{% url 'artist_update' artist.pk %}">Edit</a> | 
+      <a href="{% url 'artist_delete' artist.pk %}">Delete</a>
+  </div>
     {% endfor %}
-  </ul>
   <br>
   <ul>
+    <li><a href="{% url 'add_artist' %}">Add an Artist</a></li>
     <li><a href="{% url 'dashboard' %}">Back to Dashboard</a></li>
   </ul>
 {% endblock content %}

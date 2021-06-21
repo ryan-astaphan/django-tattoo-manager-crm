@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Customer List{% endblock title %}
+
+{% block content %}
+  <h1>Customer List</h1>
+    {% for customer in Customers %}
+    <div>
+      <a href="{{ customer.get_absolute_url }}"><h2>{{ customer }}</h2></a>
+      <a href="{% url 'customer_update' customer.pk %}">Edit</a> | 
+      <a href="{% url 'customer_delete' customer.pk %}">Delete</a>
+    </div>
+    {% endfor %}
+  <br>
+  <ul>
+    <li><a href="{% url 'add_customer' %}">Add a Customer</a></li>
+    <li><a href="{% url 'dashboard' %}">Back to Dashboard</a></li>
+  </ul>
+{% endblock content %}
