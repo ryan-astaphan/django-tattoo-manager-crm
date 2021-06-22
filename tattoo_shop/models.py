@@ -55,6 +55,9 @@ class Customer(models.Model):
     def __str__(self):
         return self.customer_name
 
+    def get_absolute_url(self):
+        return reverse('customer_detail', kwargs={'pk': self.pk})
+
 
 class Booking(models.Model):
     tattoo_shop = models.ForeignKey(
@@ -70,7 +73,7 @@ class Booking(models.Model):
         Artist, 
         null=True,
         on_delete=models.SET_NULL)
-    appointment_date = models.DateField()
+    appointment_date = models.DateTimeField()
     tattoo_description = models.TextField(max_length=300, blank=True)
     custom_design = models.BooleanField(help_text='Check the box if the \
         customer needs a custom design',
@@ -92,10 +95,16 @@ class Booking(models.Model):
         help_text='If you gave a quoted price, enter it here to remember',
         blank=True)
     # final payment should enforce positive numbers only
-    final_payment = models.DecimalField(max_digits=5, decimal_places=2)
+    final_payment = models.DecimalField(
+        max_digits=7, 
+        decimal_places=2, 
+        blank=True,
+        null=True)
     artist_paid = models.BooleanField(
         default=False,
         help_text="Check here after you've paid your artist")   
 
+    def __str__(self):
+        return f"Customer: {self.customer.customer_name} \n Artist: {self.artist.artist_name} \n"
     def get_absolute_url(self):
         return reverse('bookings')

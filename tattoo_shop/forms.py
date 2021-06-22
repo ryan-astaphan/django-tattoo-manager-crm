@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Artist, Booking, TattooShop
+from .models import Artist, Booking, Customer, TattooShop
 
 
 class AddTattooShopForm(forms.ModelForm):
@@ -23,4 +23,10 @@ class AddArtistForm(forms.ModelForm):
 class AddBookingForm(forms.ModelForm):
     class Meta:
         model = Booking  
+        fields = "__all__"
+
+
+class AddCustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
         fields = "__all__"

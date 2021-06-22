@@ -6,8 +6,12 @@
 {% block content %}
   <h1>Booking List</h1>
     {% for booking in Bookings %}
-    <div>
-      <a href="{% url 'booking_detail' booking.pk %}"><h2>{{ booking }}</h2></a>
+    <div style="background-color:rgb(182, 182, 182);padding:20px;margin-bottom: 20px;">
+      <div style="color: black">
+      <a href="{% url 'booking_detail' booking.pk %}">
+        <strong>Date: {{ booking.appointment_date }} </strong><br>
+        Customer Name: {{ booking.customer }}  | Artist Name: {{ booking.artist }}
+      </a></div>
       <a href="{% url 'booking_update' booking.pk %}">Edit</a> | 
       <a href="{% url 'booking_delete' booking.pk %}">Delete</a>
     </div>

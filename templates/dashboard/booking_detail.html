@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Booking Detail{% endblock title %}
+
+{% block content %}
+  <h1>Booking Detail</h1>
+  <div>
+    Customer Name: {{ booking.customer }} <br>
+    Artist Name: {{ booking.artist }} <br>
+    Date: {{ booking.appointment_date }}
+
+  </div>
+  <br>
+  <ul>
+    <li><a href="{% url 'booking_update' booking.pk %}">Edit Booking Information</a></li>
+    <li><a href="{% url 'bookings' %}">Back to Booking List</a></li>
+    <li><a href="{% url 'dashboard' %}">Back to Dashboard</a></li>
+  </ul>
+{% endblock content %}
+
+ 
