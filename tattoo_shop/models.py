@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+from accounts.models import CustomUser
 # from django.utils.text import slugify
 
 # https://github.com/stefanfoulis/django-phonenumber-field
@@ -10,6 +12,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class TattooShop(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
     shop_name = models.CharField(max_length=40, unique=True)
 
     def __str__(self):

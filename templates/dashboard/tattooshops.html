@@ -5,7 +5,7 @@
 
 {% block content %}
   <h1>Tattoo Shop List</h1>
-    {% for shop in Shops %}
+    {% for shop in shops %}
     <div>
         <a href="{{ shop.get_absolute_url }}"><h2>{{ shop }}</h2></a>
         <a href="{% url 'tattooshop_update' shop.pk %}">Edit</a> | 

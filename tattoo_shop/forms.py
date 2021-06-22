@@ -7,6 +7,13 @@ class AddTattooShopForm(forms.ModelForm):
     class Meta:
         model = TattooShop  
         fields = "__all__"
+    
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        obj = form.save(commit=False)
+        obj.user = self.request.user
+        obj.save()
+        return super().form_valid(form)
 
 
 class AddArtistForm(forms.ModelForm):

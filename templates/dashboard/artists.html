@@ -5,7 +5,7 @@
 
 {% block content %}
   <h1>Artist List</h1>
-    {% for artist in Artists %}
+    {% for artist in artists %}
     <div>
       <a href="{{ artist.get_absolute_url }}"><h2>{{ artist.artist_name }}</h2></a>
       <a href="{% url 'artist_update' artist.pk %}">Edit</a> | 
